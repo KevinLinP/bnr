@@ -14,13 +14,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-     NSBundle *appBundle = [NSBundle mainBundle];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     BNRHypnosisViewController *hvc = [[BNRHypnosisViewController alloc] init];
-    BNRReminderViewController *rvc = [[BNRReminderViewController alloc] initWithNibName:@"BNRReminderViewController" bundle:appBundle];
+    BNRReminderViewController *rvc = [[BNRReminderViewController alloc] init];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[hvc, rvc];
     
-    self.window.rootViewController = rvc;
+    self.window.rootViewController = tabBarController;
     
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
