@@ -9,13 +9,6 @@
 #import "BNRHypnosisViewController.h"
 #import "BNRHypnosisView.h"
 
-@interface BNRHypnosisViewController ()
-
-@property (nonatomic, weak) IBOutlet UISegmentedControl *segmentedControl;
-@property (nonatomic, weak) IBOutlet BNRHypnosisView *hypnosisView;
-
-@end
-
 @implementation BNRHypnosisViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,36 +23,16 @@
     return self;
 }
 
+- (void)loadView
+{
+    BNRHypnosisView *backgroundView = [[BNRHypnosisView alloc] init];
+    self.view = backgroundView;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    BNRHypnosisView *backgroundView = [[BNRHypnosisView alloc] initWithFrame:self.view.frame];
-    self.hypnosisView = backgroundView;
-    
-    [self.view insertSubview:backgroundView belowSubview:self.segmentedControl];
-    
     NSLog(@"BNRHypnosisViewController loaded its view.");
-}
-
-- (IBAction)changeColor:(id)sender
-{
-    UIColor *color;
-    
-    switch (self.segmentedControl.selectedSegmentIndex)
-    {
-        case 0:
-            color = [[UIColor alloc] initWithRed:1.0 green:0.0 blue:0.0 alpha:1.0];
-            break;
-        case 1:
-            color = [[UIColor alloc] initWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
-            break;
-        case 2:
-            color = [[UIColor alloc] initWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
-            break;
-    }
-    
-    self.hypnosisView.circleColor = color;
 }
 
 @end

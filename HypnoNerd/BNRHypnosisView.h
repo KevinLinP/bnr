@@ -10,6 +10,4 @@
 
 @interface BNRHypnosisView : UIView
 
-@property (strong,nonatomic) UIColor *circleColor;
-
 @end
