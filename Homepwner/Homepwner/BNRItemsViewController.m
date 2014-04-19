@@ -10,7 +10,7 @@
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 
-@interface BNRItemsViewController () <UITableViewDataSource>
+@interface BNRItemsViewController () <UITableViewDataSource, UITableViewDelegate>
 @end
 
 @implementation BNRItemsViewController
@@ -23,6 +23,12 @@
             [[BNRItemStore sharedStore] createItem];
         }
     }
+    
+    self.tableView.delegate = self;
+    
+    UIImage *image = [UIImage imageNamed:@"background.jpg"];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:image];
+    
     return self;
 }
 
@@ -50,6 +56,9 @@
         NSArray *items = [[BNRItemStore sharedStore] allItems];
         BNRItem *item = items[indexPath.row];
         description = item.description;
+        
+        UIFont *previousFont = cell.textLabel.font;
+        cell.textLabel.font = [UIFont fontWithName:previousFont.fontName size:20.0];
     }
     
     cell.textLabel.text = description;
@@ -63,4 +72,12 @@
     return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row > ([[[BNRItemStore sharedStore] allItems] count] - 1)) {
+        return 44.0;
+    } else {
+        return 60.0;
+    }
+}
 @end
