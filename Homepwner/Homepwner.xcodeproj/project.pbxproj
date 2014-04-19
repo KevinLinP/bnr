@@ -22,7 +22,6 @@
 		76BAD17319022D6200722F5B /* BNRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD17219022D6200722F5B /* BNRItemsViewController.m */; };
 		76BAD17619022FDA00722F5B /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD17519022FDA00722F5B /* BNRItem.m */; };
 		76BAD1791902321800722F5B /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD1781902321800722F5B /* BNRItemStore.m */; };
-		76BAD17B19025CD700722F5B /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76BAD17A19025CD700722F5B /* background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +57,6 @@
 		76BAD17519022FDA00722F5B /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		76BAD1771902321800722F5B /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
 		76BAD1781902321800722F5B /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
-		76BAD17A19025CD700722F5B /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +116,6 @@
 		76BAD1481900DE0100722F5B /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
-				76BAD17A19025CD700722F5B /* background.jpg */,
 				76BAD17419022FDA00722F5B /* BNRItem.h */,
 				76BAD17519022FDA00722F5B /* BNRItem.m */,
 				76BAD1771902321800722F5B /* BNRItemStore.h */,
@@ -240,7 +237,6 @@
 			files = (
 				76BAD14D1900DE0100722F5B /* InfoPlist.strings in Resources */,
 				76BAD1551900DE0100722F5B /* Images.xcassets in Resources */,
-				76BAD17B19025CD700722F5B /* background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +456,6 @@
 				76BAD16D1900DE0100722F5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		76BAD16E1900DE0100722F5B /* Build configuration list for PBXNativeTarget "HomepwnerTests" */ = {
 			isa = XCConfigurationList;
@@ -469,7 +464,6 @@
 				76BAD1701900DE0100722F5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

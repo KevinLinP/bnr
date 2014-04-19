@@ -10,7 +10,7 @@
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 
-@interface BNRItemsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface BNRItemsViewController () <UITableViewDataSource>
 @end
 
 @implementation BNRItemsViewController
@@ -23,12 +23,6 @@
             [[BNRItemStore sharedStore] createItem];
         }
     }
-    
-    self.tableView.delegate = self;
-    
-    UIImage *image = [UIImage imageNamed:@"background.jpg"];
-    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:image];
-    
     return self;
 }
 
@@ -48,20 +42,10 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-    NSString *description;
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    BNRItem *item = items[indexPath.row];
     
-    if (indexPath.row > ([[[BNRItemStore sharedStore] allItems] count] - 1)) {
-        description = @"No more items!";
-    } else {
-        NSArray *items = [[BNRItemStore sharedStore] allItems];
-        BNRItem *item = items[indexPath.row];
-        description = item.description;
-        
-        UIFont *previousFont = cell.textLabel.font;
-        cell.textLabel.font = [UIFont fontWithName:previousFont.fontName size:20.0];
-    }
-    
-    cell.textLabel.text = description;
+    cell.textLabel.text = item.description;
     
     return cell;
 }
@@ -69,15 +53,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count] + 1;
+    return [[[BNRItemStore sharedStore] allItems] count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row > ([[[BNRItemStore sharedStore] allItems] count] - 1)) {
-        return 44.0;
-    } else {
-        return 60.0;
-    }
-}
 @end
