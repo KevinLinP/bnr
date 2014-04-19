@@ -71,14 +71,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger dataRows = [[[BNRItemStore sharedStore] allItems] count];
-
-    if (self.editing) { //TODO: breaks on swipe delete
-        return dataRows;
-    } else {
-        return dataRows + 1;
-    }
-    
+    return[[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 - (IBAction)addNewItem:(id)sender
@@ -95,14 +88,9 @@
     if (self.isEditing) {
         [sender setTitle:@"Edit" forState:UIControlStateNormal];
         [self setEditing:NO animated:YES];
-        
-        [self.tableView insertRowsAtIndexPaths:@[[self messageIndexPath]]
-                              withRowAnimation:UITableViewRowAnimationFade];
     } else {
         [sender setTitle:@"Done" forState:UIControlStateNormal];
         [self setEditing:YES animated:YES];
-        
-        [self.tableView deleteRowsAtIndexPaths:@[[self messageIndexPath]] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -148,6 +136,18 @@
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return ![self isMessageIndexPath:indexPath];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    if ([self isMessageIndexPath:proposedDestinationIndexPath]) {
+        NSInteger newRow = proposedDestinationIndexPath.row - 1;
+        NSIndexPath *newPath = [NSIndexPath indexPathForRow:newRow
+                                                  inSection:proposedDestinationIndexPath.section];
+        return newPath;
+    }
+    
+    return proposedDestinationIndexPath;
 }
 
 @end
