@@ -42,10 +42,17 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
+    NSString *description;
     
-    cell.textLabel.text = item.description;
+    if (indexPath.row > ([[[BNRItemStore sharedStore] allItems] count] - 1)) {
+        description = @"No more items!";
+    } else {
+        NSArray *items = [[BNRItemStore sharedStore] allItems];
+        BNRItem *item = items[indexPath.row];
+        description = item.description;
+    }
+    
+    cell.textLabel.text = description;
     
     return cell;
 }
@@ -53,7 +60,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 @end
