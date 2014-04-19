@@ -23,6 +23,7 @@
             [[BNRItemStore sharedStore] createItem];
         }
     }
+    
     return self;
 }
 
@@ -41,10 +42,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    NSArray *items;
+    switch (indexPath.section) {
+        case 0:
+            items = self.bnrItemsUnder50;
+            break;
+        case 1:
+            items = self.bnrItemsOver50;
+            break;
+        default:
+            @throw [NSException exceptionWithName:@"WTF" reason:@"WTF" userInfo:nil];
+            
+    }
     BNRItem *item = items[indexPath.row];
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     cell.textLabel.text = item.description;
     
     return cell;
@@ -53,7 +65,43 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    switch (section) {
+        case 0:
+            return [self.bnrItemsUnder50 count];
+        case 1:
+            return [self.bnrItemsOver50 count];
+        default:
+            @throw [NSException exceptionWithName:@"WTF" reason:@"WTF" userInfo:nil];
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"Under $50";
+        case 1:
+            return @"Over $50";
+        default:
+            @throw [NSException exceptionWithName:@"WTF" reason:@"WTF" userInfo:nil];
+    }
+}
+
+- (NSArray *)bnrItemsUnder50
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"valueInDollars < 50"];
+    return [[[BNRItemStore sharedStore] allItems] filteredArrayUsingPredicate:predicate];
+}
+
+- (NSArray *)bnrItemsOver50
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"valueInDollars >= 50"];
+    return [[[BNRItemStore sharedStore] allItems] filteredArrayUsingPredicate:predicate];
 }
 
 @end
