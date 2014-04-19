@@ -19,6 +19,9 @@
 		76BAD15E1900DE0100722F5B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1461900DE0100722F5B /* UIKit.framework */; };
 		76BAD1661900DE0100722F5B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76BAD1641900DE0100722F5B /* InfoPlist.strings */; };
 		76BAD1681900DE0100722F5B /* HomepwnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD1671900DE0100722F5B /* HomepwnerTests.m */; };
+		76BAD17319022D6200722F5B /* BNRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD17219022D6200722F5B /* BNRItemsViewController.m */; };
+		76BAD17619022FDA00722F5B /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD17519022FDA00722F5B /* BNRItem.m */; };
+		76BAD1791902321800722F5B /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD1781902321800722F5B /* BNRItemStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		76BAD1631900DE0100722F5B /* HomepwnerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HomepwnerTests-Info.plist"; sourceTree = "<group>"; };
 		76BAD1651900DE0100722F5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		76BAD1671900DE0100722F5B /* HomepwnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerTests.m; sourceTree = "<group>"; };
+		76BAD17119022D6200722F5B /* BNRItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemsViewController.h; sourceTree = "<group>"; };
+		76BAD17219022D6200722F5B /* BNRItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemsViewController.m; sourceTree = "<group>"; };
+		76BAD17419022FDA00722F5B /* BNRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
+		76BAD17519022FDA00722F5B /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
+		76BAD1771902321800722F5B /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
+		76BAD1781902321800722F5B /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +116,14 @@
 		76BAD1481900DE0100722F5B /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				76BAD17419022FDA00722F5B /* BNRItem.h */,
+				76BAD17519022FDA00722F5B /* BNRItem.m */,
+				76BAD1771902321800722F5B /* BNRItemStore.h */,
+				76BAD1781902321800722F5B /* BNRItemStore.m */,
 				76BAD1511900DE0100722F5B /* BNRAppDelegate.h */,
 				76BAD1521900DE0100722F5B /* BNRAppDelegate.m */,
+				76BAD17119022D6200722F5B /* BNRItemsViewController.h */,
+				76BAD17219022D6200722F5B /* BNRItemsViewController.m */,
 				76BAD1541900DE0100722F5B /* Images.xcassets */,
 				76BAD1491900DE0100722F5B /* Supporting Files */,
 			);
@@ -240,6 +255,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76BAD1791902321800722F5B /* BNRItemStore.m in Sources */,
+				76BAD17319022D6200722F5B /* BNRItemsViewController.m in Sources */,
+				76BAD17619022FDA00722F5B /* BNRItem.m in Sources */,
 				76BAD14F1900DE0100722F5B /* main.m in Sources */,
 				76BAD1531900DE0100722F5B /* BNRAppDelegate.m in Sources */,
 			);
