@@ -56,14 +56,9 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     
-    if ([self isMessageIndexPath:indexPath]) {
-        cell.textLabel.text = @"No more items!";
-    } else {
-        NSArray *items = [[BNRItemStore sharedStore] allItems];
-        BNRItem *item = items[indexPath.row];
-        
-        cell.textLabel.text = item.description;
-    }
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    BNRItem *item = items[indexPath.row];
+    cell.textLabel.text = item.description;
     
     return cell;
 }
@@ -71,15 +66,16 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return[[[BNRItemStore sharedStore] allItems] count] + 1;
+    return[[[BNRItemStore sharedStore] allItems] count];
 }
 
 - (IBAction)addNewItem:(id)sender
 {
     BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
-    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
     
+    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
@@ -109,45 +105,6 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     [[BNRItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return @"Remove";
-}
-
-- (NSIndexPath *)messageIndexPath
-{
-    NSInteger dataRows = [[[BNRItemStore sharedStore] allItems] count];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dataRows inSection:0];
-    return indexPath;
-}
-
-- (BOOL)isMessageIndexPath:(NSIndexPath *)indexPath
-{
-    return indexPath.row == [self messageIndexPath].row;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return ![self isMessageIndexPath:indexPath];
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return ![self isMessageIndexPath:indexPath];
-}
-
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-{
-    if ([self isMessageIndexPath:proposedDestinationIndexPath]) {
-        NSInteger newRow = proposedDestinationIndexPath.row - 1;
-        NSIndexPath *newPath = [NSIndexPath indexPathForRow:newRow
-                                                  inSection:proposedDestinationIndexPath.section];
-        return newPath;
-    }
-    
-    return proposedDestinationIndexPath;
 }
 
 @end
