@@ -7,6 +7,7 @@
 //
 
 #import "BNRItemsViewController.h"
+#import "BNRDetailViewController.h"
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 
@@ -51,13 +52,18 @@
     [self.tableView setTableHeaderView:header];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
+    BNRItem *item = [self itemAtIndexPath:indexPath];
     cell.textLabel.text = item.description;
     
     return cell;
@@ -90,6 +96,14 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+    detailViewController.item = [self itemAtIndexPath:indexPath];
+                          
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -105,6 +119,12 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     [[BNRItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+}
+                          
+- (BNRItem *)itemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    return items[indexPath.row];
 }
 
 @end
