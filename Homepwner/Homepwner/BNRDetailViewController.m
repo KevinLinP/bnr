@@ -7,6 +7,7 @@
 //
 
 #import "BNRDetailViewController.h"
+#import "BNRDateViewController.h"
 #import "BNRItem.h"
 
 @interface BNRDetailViewController ()
@@ -42,7 +43,7 @@
     }
     dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    
+
     self.dateLabel.text = [dateFormatter stringFromDate:item.dateCreated];
 }
 
@@ -63,6 +64,13 @@
     [self.nameField resignFirstResponder];
     [self.serialNumberField resignFirstResponder];
     [self.valueField resignFirstResponder];
+}
+
+- (IBAction)changeDate:(id)sender
+{
+    BNRDateViewController *dateViewController = [[BNRDateViewController alloc] init];
+    dateViewController.item = self.item;
+    [self.navigationController pushViewController:dateViewController animated:true];
 }
 
 @end

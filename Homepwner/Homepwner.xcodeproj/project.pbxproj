@@ -24,6 +24,8 @@
 		76BAD1791902321800722F5B /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD1781902321800722F5B /* BNRItemStore.m */; };
 		76BAD1811903A43100722F5B /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD17F1903A43100722F5B /* BNRDetailViewController.m */; };
 		76BAD1821903A43100722F5B /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BAD1801903A43100722F5B /* BNRDetailViewController.xib */; };
+		76CB660B19061E6500224D1F /* BNRDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CB660919061E6500224D1F /* BNRDateViewController.m */; };
+		76CB660C19061E6500224D1F /* BNRDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CB660A19061E6500224D1F /* BNRDateViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,9 @@
 		76BAD17E1903A43100722F5B /* BNRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
 		76BAD17F1903A43100722F5B /* BNRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDetailViewController.m; sourceTree = "<group>"; };
 		76BAD1801903A43100722F5B /* BNRDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRDetailViewController.xib; sourceTree = "<group>"; };
+		76CB660819061E6500224D1F /* BNRDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDateViewController.h; sourceTree = "<group>"; };
+		76CB660919061E6500224D1F /* BNRDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDateViewController.m; sourceTree = "<group>"; };
+		76CB660A19061E6500224D1F /* BNRDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRDateViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +137,9 @@
 				76BAD17E1903A43100722F5B /* BNRDetailViewController.h */,
 				76BAD17F1903A43100722F5B /* BNRDetailViewController.m */,
 				76BAD1801903A43100722F5B /* BNRDetailViewController.xib */,
+				76CB660819061E6500224D1F /* BNRDateViewController.h */,
+				76CB660919061E6500224D1F /* BNRDateViewController.m */,
+				76CB660A19061E6500224D1F /* BNRDateViewController.xib */,
 				76BAD1541900DE0100722F5B /* Images.xcassets */,
 				76BAD1491900DE0100722F5B /* Supporting Files */,
 			);
@@ -244,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76BAD1821903A43100722F5B /* BNRDetailViewController.xib in Resources */,
+				76CB660C19061E6500224D1F /* BNRDateViewController.xib in Resources */,
 				76BAD14D1900DE0100722F5B /* InfoPlist.strings in Resources */,
 				76BAD1551900DE0100722F5B /* Images.xcassets in Resources */,
 			);
@@ -264,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76CB660B19061E6500224D1F /* BNRDateViewController.m in Sources */,
 				76BAD1811903A43100722F5B /* BNRDetailViewController.m in Sources */,
 				76BAD1791902321800722F5B /* BNRItemStore.m in Sources */,
 				76BAD17319022D6200722F5B /* BNRItemsViewController.m in Sources */,
