@@ -97,4 +97,9 @@
     return YES;
 }
 
+- (IBAction)clearImage:(id)sender {
+    self.imageView.image = NULL;
+    [[BNRImageStore sharedStore] deleteImageForKey:self.item.itemKey];
+}
+
 @end
