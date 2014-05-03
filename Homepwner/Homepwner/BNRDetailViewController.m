@@ -73,6 +73,16 @@
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        UIImage *image = [UIImage imageNamed:@"crosshair.png"];
+        CGSize frameSize = imagePicker.view.frame.size;
+        CGSize imageSize = image.size;
+        CGFloat x = (frameSize.width / 2) - (imageSize.width / 2);
+        CGFloat y = (frameSize.height / 2) - (imageSize.height / 2);
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.frame = CGRectMake(x, y, imageSize.width, imageSize.height);
+        imagePicker.cameraOverlayView = imageView;
+    
     } else {
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }

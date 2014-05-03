@@ -24,6 +24,7 @@
 		76BAD1791902321800722F5B /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD1781902321800722F5B /* BNRItemStore.m */; };
 		76BAD1811903A43100722F5B /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD17F1903A43100722F5B /* BNRDetailViewController.m */; };
 		76BAD1821903A43100722F5B /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BAD1801903A43100722F5B /* BNRDetailViewController.xib */; };
+		76BCAE49191551D100664C5F /* crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 76BCAE48191551D100664C5F /* crosshair.png */; };
 		76CB660F190F53FF00224D1F /* BNRImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CB660E190F53FF00224D1F /* BNRImageStore.m */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		76BAD17E1903A43100722F5B /* BNRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
 		76BAD17F1903A43100722F5B /* BNRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDetailViewController.m; sourceTree = "<group>"; };
 		76BAD1801903A43100722F5B /* BNRDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRDetailViewController.xib; sourceTree = "<group>"; };
+		76BCAE48191551D100664C5F /* crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshair.png; sourceTree = "<group>"; };
 		76CB660D190F53FF00224D1F /* BNRImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRImageStore.h; sourceTree = "<group>"; };
 		76CB660E190F53FF00224D1F /* BNRImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRImageStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 		76BAD1481900DE0100722F5B /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				76BCAE48191551D100664C5F /* crosshair.png */,
 				76BAD17419022FDA00722F5B /* BNRItem.h */,
 				76BAD17519022FDA00722F5B /* BNRItem.m */,
 				76BAD1771902321800722F5B /* BNRItemStore.h */,
@@ -250,6 +253,7 @@
 			files = (
 				76BAD1821903A43100722F5B /* BNRDetailViewController.xib in Resources */,
 				76BAD14D1900DE0100722F5B /* InfoPlist.strings in Resources */,
+				76BCAE49191551D100664C5F /* crosshair.png in Resources */,
 				76BAD1551900DE0100722F5B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
