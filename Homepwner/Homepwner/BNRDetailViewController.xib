@@ -85,18 +85,6 @@
                                 <action selector="takePicture:" destination="-1" id="igP-24-qLz"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" id="2u2-hj-TDU">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7V9-fO-75G">
-                                <rect key="frame" x="51" y="6" width="83" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Clear Image">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clearImage:" destination="-1" eventType="touchUpInside" id="FAt-ND-VUb"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
                     </items>
                 </toolbar>
             </subviews>

@@ -73,21 +73,10 @@
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
-        UIImage *image = [UIImage imageNamed:@"crosshair.png"];
-        CGSize frameSize = imagePicker.view.frame.size;
-        CGSize imageSize = image.size;
-        CGFloat x = (frameSize.width / 2) - (imageSize.width / 2);
-        CGFloat y = (frameSize.height / 2) - (imageSize.height / 2);
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        imageView.frame = CGRectMake(x, y, imageSize.width, imageSize.height);
-        imagePicker.cameraOverlayView = imageView;
-    
     } else {
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     
-    imagePicker.allowsEditing = YES;
     imagePicker.delegate = self;
     
     [self presentViewController:imagePicker animated:YES completion:nil];
@@ -95,7 +84,7 @@
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *image = info[UIImagePickerControllerEditedImage];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = image;
     [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -105,11 +94,6 @@
 {
     [textField resignFirstResponder];
     return YES;
-}
-
-- (IBAction)clearImage:(id)sender {
-    self.imageView.image = NULL;
-    [[BNRImageStore sharedStore] deleteImageForKey:self.item.itemKey];
 }
 
 @end
