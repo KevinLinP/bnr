@@ -17,6 +17,8 @@
 
 @implementation BNRItemsViewController
 
+#pragma mark - initializers
+
 - (instancetype)init
 {
     self = [super initWithStyle:UITableViewStylePlain];
@@ -39,6 +41,8 @@
     return [self init];
 }
 
+#pragma mark - view lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,6 +55,8 @@
     [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
+
+#pragma mark - tableview data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,24 +75,6 @@
     return[[[BNRItemStore sharedStore] allItems] count];
 }
 
-- (IBAction)addNewItem:(id)sender
-{
-    BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
-    
-    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
-    detailViewController.item = [self itemAtIndexPath:indexPath];
-                          
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -103,6 +91,30 @@
 {
     [[BNRItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
+
+#pragma mark - tableview delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+    detailViewController.item = [self itemAtIndexPath:indexPath];
+                          
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
+#pragma mark - actions
+
+- (IBAction)addNewItem:(id)sender
+{
+    BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
+    
+    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+}
+
+#pragma mark - helpers
                           
 - (BNRItem *)itemAtIndexPath:(NSIndexPath *)indexPath
 {
