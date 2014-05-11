@@ -39,6 +39,10 @@
 {
     [[UIColor blackColor] set];
     for (BNRLine *line in self.finishedLines) {
+        CGFloat hue = (line.angleInRadians + M_PI) / (2.0 * M_PI);
+        UIColor *lineColor = [[UIColor alloc] initWithHue:hue saturation:1.0 brightness:1.0 alpha:1.0];
+        [lineColor set];
+        
         [self strokeLine:line];
     }
     

@@ -13,4 +13,6 @@
 @property (nonatomic) CGPoint begin;
 @property (nonatomic) CGPoint end;
 
+- (float)angleInRadians;
+
 @end
