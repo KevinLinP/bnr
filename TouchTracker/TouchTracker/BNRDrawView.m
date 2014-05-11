@@ -46,7 +46,7 @@
         [self strokeLine:line];
     }
     
-    [[UIColor redColor] set];
+    [[UIColor whiteColor] set];
     for (NSValue *key in self.linesInProgress) {
         [self strokeLine:self.linesInProgress[key]];
     }
