@@ -22,6 +22,7 @@
 		761ADD1F191EF9AB00B105D2 /* BNRLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 761ADD1E191EF9AB00B105D2 /* BNRLine.m */; };
 		761ADD22191EF9DB00B105D2 /* BNRDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 761ADD21191EF9DB00B105D2 /* BNRDrawView.m */; };
 		761ADD25191EF9F900B105D2 /* BNRDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 761ADD24191EF9F900B105D2 /* BNRDrawViewController.m */; };
+		761ADD28191F1A1900B105D2 /* BNRCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 761ADD27191F1A1900B105D2 /* BNRCircle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		761ADD21191EF9DB00B105D2 /* BNRDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawView.m; sourceTree = "<group>"; };
 		761ADD23191EF9F900B105D2 /* BNRDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDrawViewController.h; sourceTree = "<group>"; };
 		761ADD24191EF9F900B105D2 /* BNRDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawViewController.m; sourceTree = "<group>"; };
+		761ADD26191F1A1900B105D2 /* BNRCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRCircle.h; sourceTree = "<group>"; };
+		761ADD27191F1A1900B105D2 /* BNRCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRCircle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				761ADD24191EF9F900B105D2 /* BNRDrawViewController.m */,
 				761ADD20191EF9DB00B105D2 /* BNRDrawView.h */,
 				761ADD21191EF9DB00B105D2 /* BNRDrawView.m */,
+				761ADD26191F1A1900B105D2 /* BNRCircle.h */,
+				761ADD27191F1A1900B105D2 /* BNRCircle.m */,
 				761ADD1D191EF9AB00B105D2 /* BNRLine.h */,
 				761ADD1E191EF9AB00B105D2 /* BNRLine.m */,
 				761ADD00191EE63F00B105D2 /* Images.xcassets */,
@@ -257,6 +262,7 @@
 			files = (
 				761ADCFB191EE63F00B105D2 /* main.m in Sources */,
 				761ADD25191EF9F900B105D2 /* BNRDrawViewController.m in Sources */,
+				761ADD28191F1A1900B105D2 /* BNRCircle.m in Sources */,
 				761ADD1F191EF9AB00B105D2 /* BNRLine.m in Sources */,
 				761ADCFF191EE63F00B105D2 /* BNRAppDelegate.m in Sources */,
 				761ADD22191EF9DB00B105D2 /* BNRDrawView.m in Sources */,
@@ -456,6 +462,7 @@
 				761ADD19191EE63F00B105D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		761ADD1A191EE63F00B105D2 /* Build configuration list for PBXNativeTarget "TouchTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +471,7 @@
 				761ADD1C191EE63F00B105D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
