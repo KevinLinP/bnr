@@ -7,6 +7,7 @@
 //
 
 #import "BNRCircle.h"
+#import "BNRLine.h"
 
 @implementation BNRCircle
 
@@ -23,6 +24,11 @@
     } else {
         self.radius = yDist / 2;
     }
+    
+    BNRLine *line = [[BNRLine alloc] init];
+    line.begin = loc1;
+    line.end = loc2;
+    self.angleInRadians = line.angleInRadians;
 }
 
 @end

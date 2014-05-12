@@ -46,26 +46,24 @@
         if ([shape isKindOfClass:[BNRLine class]]) {
             BNRLine *line = (BNRLine *)shape;
             
-            CGFloat hue = (line.angleInRadians + M_PI) / (2.0 * M_PI);
-            UIColor *lineColor = [[UIColor alloc] initWithHue:hue saturation:1.0 brightness:1.0 alpha:1.0];
-            [lineColor set];
-            
+            [[self colorFromAngle: [line angleInRadians]] set];
             [self strokeLine:line];
         } else {
             BNRCircle *circle = (BNRCircle *)shape;
             [UIColor blackColor];
             
+            [[self colorFromAngle:circle.angleInRadians] set];
             [self strokeCircle:circle];
         }
     }
     
-    [[UIColor whiteColor] set];
-    
     if (self.currentLine) {
+        [[self colorFromAngle: [self.currentLine angleInRadians]] set];
         [self strokeLine:self.currentLine];
     }
     
     if (self.currentCircle) {
+        [[self colorFromAngle:self.currentCircle.angleInRadians] set];
         [self strokeCircle:self.currentCircle];
     }
 }
@@ -175,6 +173,14 @@
     [bp addArcWithCenter:circle.center radius:circle.radius startAngle:0.0 endAngle:(M_PI * 2.0) clockwise:true];
 
     [bp stroke];
+}
+
+- (UIColor *)colorFromAngle:(CGFloat)radians
+{
+    CGFloat hue = (radians + M_PI) / (2.0 * M_PI);
+    UIColor *lineColor = [[UIColor alloc] initWithHue:hue saturation:1.0 brightness:1.0 alpha:1.0];
+    
+    return lineColor;
 }
 
 

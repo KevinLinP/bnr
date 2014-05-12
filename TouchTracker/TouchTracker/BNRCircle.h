@@ -12,6 +12,7 @@
 
 @property (nonatomic) CGPoint center;
 @property (nonatomic) CGFloat radius;
+@property (nonatomic) CGFloat angleInRadians;
 
 - (void)setFromFirstPoint:(CGPoint)loc1
          secondPoint:(CGPoint)loc2;
