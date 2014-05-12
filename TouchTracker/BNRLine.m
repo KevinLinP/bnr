@@ -10,12 +10,4 @@
 
 @implementation BNRLine
 
-- (CGFloat)angleInRadians
-{
-    CGFloat deltaY = self.end.y - self.begin.y;
-    CGFloat deltaX = self.end.x - self.begin.x;
-    
-    return atan2(deltaY, deltaX);
-}
-
 @end
