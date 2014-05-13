@@ -116,14 +116,14 @@
 		761ADCF4191EE63F00B105D2 /* TouchTracker */ = {
 			isa = PBXGroup;
 			children = (
-				761ADD1D191EF9AB00B105D2 /* BNRLine.h */,
+				761ADCFD191EE63F00B105D2 /* BNRAppDelegate.h */,
+				761ADCFE191EE63F00B105D2 /* BNRAppDelegate.m */,
 				761ADD23191EF9F900B105D2 /* BNRDrawViewController.h */,
 				761ADD24191EF9F900B105D2 /* BNRDrawViewController.m */,
 				761ADD20191EF9DB00B105D2 /* BNRDrawView.h */,
 				761ADD21191EF9DB00B105D2 /* BNRDrawView.m */,
+				761ADD1D191EF9AB00B105D2 /* BNRLine.h */,
 				761ADD1E191EF9AB00B105D2 /* BNRLine.m */,
-				761ADCFD191EE63F00B105D2 /* BNRAppDelegate.h */,
-				761ADCFE191EE63F00B105D2 /* BNRAppDelegate.m */,
 				761ADD00191EE63F00B105D2 /* Images.xcassets */,
 				761ADCF5191EE63F00B105D2 /* Supporting Files */,
 			);
@@ -456,6 +456,7 @@
 				761ADD19191EE63F00B105D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		761ADD1A191EE63F00B105D2 /* Build configuration list for PBXNativeTarget "TouchTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +465,7 @@
 				761ADD1C191EE63F00B105D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
