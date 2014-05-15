@@ -45,6 +45,11 @@
     return self;
 }
 
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
 # pragma mark - view drawing
 
 - (void)drawRect:(CGRect)rect
@@ -132,6 +137,19 @@
     CGPoint point = [gr locationInView:self];
     self.selectedLine = [self lineAtPoint:point];
     
+    if (self.selectedLine) {
+        [self becomeFirstResponder];
+        
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        UIMenuItem *deleteItem = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteLine:)];
+        menu.menuItems = @[deleteItem];
+        
+        [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2) inView:self];
+        [menu setMenuVisible:YES animated:YES];
+    } else {
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+    }
+    
     [self setNeedsDisplay];
 }
 
@@ -142,6 +160,14 @@
     [self.linesInProgress removeAllObjects];
     [self.finishedLines removeAllObjects];
     
+    [self setNeedsDisplay];
+}
+
+# pragma mark - menu controller actions
+
+- (void)deleteLine:(id)sender
+{
+    [self.finishedLines removeObject:self.selectedLine];
     [self setNeedsDisplay];
 }
 
