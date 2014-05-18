@@ -8,17 +8,13 @@
 
 #import "BNRDrawView.h"
 #import "BNRLine.h"
-#import "BNRCircle.h"
 
-@interface BNRDrawView ()
+@interface BNRDrawView () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) BNRLine *currentLine;
-@property (nonatomic, strong) BNRCircle *currentCircle;
-
-@property (nonatomic, strong) UITouch *touch1;
-@property (nonatomic, strong) UITouch *touch2;
-
-@property (nonatomic, strong) NSMutableArray *finishedShapes;
+@property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
+@property (nonatomic, strong) NSMutableDictionary *linesInProgress;
+@property (nonatomic, strong) NSMutableArray *finishedLines;
+@property (nonatomic, weak) BNRLine *selectedLine;
 
 @end
 
@@ -30,41 +26,58 @@
 {
     self = [super initWithFrame:r];
     if (self) {
-        self.finishedShapes = [[NSMutableArray alloc] init];
+        self.linesInProgress = [[NSMutableDictionary alloc] init];
+        self.finishedLines = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
+        
+        UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+        doubleTapRecognizer.numberOfTapsRequired = 2;
+        doubleTapRecognizer.delaysTouchesBegan = YES;
+        
+        [self addGestureRecognizer:doubleTapRecognizer];
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        tapRecognizer.delaysTouchesBegan = YES;
+        [tapRecognizer requireGestureRecognizerToFail:doubleTapRecognizer];
+        [self addGestureRecognizer:tapRecognizer];
+        
+        UILongPressGestureRecognizer *pressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+        [self addGestureRecognizer:pressRecognizer];
+        
+        self.moveRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveLine:)];
+        self.moveRecognizer.delegate = self;
+        self.moveRecognizer.cancelsTouchesInView = NO;
+        [self addGestureRecognizer:self.moveRecognizer];
     }
     
     return self;
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
 }
 
 # pragma mark - view drawing
 
 - (void)drawRect:(CGRect)rect
 {
-    for (NSObject *shape in self.finishedShapes) {
-        if ([shape isKindOfClass:[BNRLine class]]) {
-            BNRLine *line = (BNRLine *)shape;
-            
-            [[self colorFromAngle: [line angleInRadians]] set];
-            [self strokeLine:line];
-        } else {
-            BNRCircle *circle = (BNRCircle *)shape;
-            [UIColor blackColor];
-            
-            [[self colorFromAngle:circle.angleInRadians] set];
-            [self strokeCircle:circle];
-        }
+    for (BNRLine *line in self.finishedLines) {
+        [[self colorFromAngle: [line angleInRadians]] set];
+        [self strokeLine:line];
     }
     
-    if (self.currentLine) {
-        [[self colorFromAngle: [self.currentLine angleInRadians]] set];
-        [self strokeLine:self.currentLine];
+    [[UIColor redColor] set];
+    for (NSValue *key in self.linesInProgress) {
+        BNRLine *line = self.linesInProgress[key];
+        [[self colorFromAngle:[line angleInRadians]] set];
+        [self strokeLine:line];
     }
     
-    if (self.currentCircle) {
-        [[self colorFromAngle:self.currentCircle.angleInRadians] set];
-        [self strokeCircle:self.currentCircle];
+    if (self.selectedLine) {
+        [[UIColor whiteColor] set];
+        [self strokeLine:self.selectedLine];
     }
 }
 
@@ -78,19 +91,13 @@
     for (UITouch *t in touches) {
         CGPoint location = [t locationInView:self];
         
-        if (!self.currentLine && !self.currentCircle) {
-            BNRLine *line = [[BNRLine alloc] init];
-            line.begin = location;
-            line.end = location;
-            self.currentLine = line;
-            self.touch1 = t;
-        } else if (self.currentLine && !self.currentCircle) {
-            self.touch2 = t;
-            self.currentLine = nil;
-            BNRCircle *circle = [[BNRCircle alloc] init];
-            [circle setFromFirstPoint:[self.touch1 locationInView:self] secondPoint:location];
-            self.currentCircle = circle;
-        }
+        BNRLine *line = [[BNRLine alloc] init];
+        line.begin = location;
+        line.end = location;
+        
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        
+        self.linesInProgress[key] = line;
     }
     
     [self setNeedsDisplay];
@@ -99,19 +106,9 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for (UITouch *t in touches) {
-        CGPoint location = [t locationInView:self];
-        
-        if (self.currentLine) {
-            if (t == self.touch1) {
-                self.currentLine.end = location;
-            }
-        } else if (self.currentCircle) {
-            if (t == self.touch1) {
-                [self.currentCircle setFromFirstPoint:location secondPoint:[self.touch2 locationInView:self]];
-            } else if (t== self.touch2) {
-                [self.currentCircle setFromFirstPoint:[self.touch1 locationInView:self] secondPoint:location];
-            }
-        }
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        BNRLine *line = self.linesInProgress[key];
+        line.end = [t locationInView:self];
     }
     
     [self setNeedsDisplay];
@@ -120,21 +117,12 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for (UITouch *t in touches) {
-        if (self.currentLine) {
-            [self.finishedShapes addObject:self.currentLine];
-            self.currentLine = nil;
-            self.touch1 = nil;
-        } else if (self.currentCircle) {
-            if (t == self.touch1 || self.touch2) {
-                [self.finishedShapes addObject:self.currentCircle];
-                self.currentCircle = nil;
-                self.touch1 = nil;
-                self.touch2 = nil;
-            }
-        }
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        BNRLine *line = self.linesInProgress[key];
+        
+        [self.finishedLines addObject:line];
+        [self.linesInProgress removeObjectForKey:key];
     }
-    
-    NSLog(@"%i", touches.count);
     
     [self setNeedsDisplay];
 }
@@ -143,12 +131,102 @@
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
-    self.touch1 = nil;
-    self.touch2 = nil;
-    self.currentLine = nil;
-    self.currentCircle = nil;
+    for (UITouch *t in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        [self.linesInProgress removeObjectForKey:key];
+    }
     
     [self setNeedsDisplay];
+}
+
+# pragma mark - gesture actions
+
+- (void)tap:(UIGestureRecognizer *)gr
+{
+    NSLog(@"Recgonized Tap");
+    
+    CGPoint point = [gr locationInView:self];
+    self.selectedLine = [self lineAtPoint:point];
+    
+    if (self.selectedLine) {
+        [self becomeFirstResponder];
+        
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        UIMenuItem *deleteItem = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteLine:)];
+        menu.menuItems = @[deleteItem];
+        
+        [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2) inView:self];
+        [menu setMenuVisible:YES animated:YES];
+    } else {
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+    }
+    
+    [self setNeedsDisplay];
+}
+
+- (void)doubleTap:(UIGestureRecognizer *)gr
+{
+    NSLog(@"Recgonized Double Tap");
+    
+    [self.linesInProgress removeAllObjects];
+    [self.finishedLines removeAllObjects];
+    
+    [self setNeedsDisplay];
+}
+
+- (void)longPress:(UILongPressGestureRecognizer *)gr
+{
+    if (gr.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gr locationInView:self];
+        self.selectedLine = [self lineAtPoint:point];
+        
+        if (self.selectedLine) {
+            [self.linesInProgress removeAllObjects];
+        }
+    } else if (gr.state == UIGestureRecognizerStateEnded) {
+        self.selectedLine = nil;
+    }
+    [self setNeedsDisplay];
+}
+
+# pragma mark - UIGextureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return (gestureRecognizer == self.moveRecognizer);
+}
+
+# pragma mark - menu controller actions
+
+- (void)deleteLine:(id)sender
+{
+    [self.finishedLines removeObject:self.selectedLine];
+    [self setNeedsDisplay];
+}
+
+- (void)moveLine:(UIPanGestureRecognizer *)gr
+{
+    if (!self.selectedLine) {
+        return;
+    }
+    
+    if (gr.state == UIGestureRecognizerStateChanged) {
+        CGPoint translation = [gr translationInView:self];
+        
+        CGPoint begin = self.selectedLine.begin;
+        CGPoint end = self.selectedLine.end;
+        begin.x += translation.x;
+        begin.y += translation.y;
+        end.x += translation.x;
+        end.y += translation.y;
+        
+        self.selectedLine.begin = begin;
+        self.selectedLine.end = end;
+        
+        [self setNeedsDisplay];
+        
+        [gr setTranslation:CGPointZero inView:self];
+    }
 }
 
 # pragma mark - helpers
@@ -164,15 +242,23 @@
     [bp stroke];
 }
 
-- (void)strokeCircle: (BNRCircle *)circle
+- (BNRLine *)lineAtPoint:(CGPoint)p
 {
-    UIBezierPath *bp = [UIBezierPath bezierPath];
-    bp.lineWidth = 10;
+    for (BNRLine *l in self.finishedLines) {
+        CGPoint start = l.begin;
+        CGPoint end = l.end;
+        
+        for (float t = 0.0; t <= 1.0; t += 0.05) {
+            float x = start.x + t * (end.x - start.x);
+            float y = start.y + t * (end.y - start.y);
+            
+            if (hypot(x - p.x, y - p.y) < 20.0) {
+                return l;
+            }
+        }
+    }
     
-    [bp moveToPoint:CGPointMake(circle.center.x + circle.radius, circle.center.y)];
-    [bp addArcWithCenter:circle.center radius:circle.radius startAngle:0.0 endAngle:(M_PI * 2.0) clockwise:true];
-
-    [bp stroke];
+    return nil;
 }
 
 - (UIColor *)colorFromAngle:(CGFloat)radians
@@ -182,6 +268,5 @@
     
     return lineColor;
 }
-
 
 @end
