@@ -88,6 +88,10 @@
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
+    if (self.selectedLine) {
+        return;
+    }
+    
     for (UITouch *t in touches) {
         CGPoint location = [t locationInView:self];
         
@@ -105,6 +109,10 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (self.selectedLine) {
+        return;
+    }
+    
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
@@ -116,6 +124,10 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (self.selectedLine) {
+        return;
+    }
+    
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
@@ -211,6 +223,9 @@
     }
     
     if (gr.state == UIGestureRecognizerStateChanged) {
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        [menu setMenuVisible:NO animated:NO];
+        
         CGPoint translation = [gr translationInView:self];
         
         CGPoint begin = self.selectedLine.begin;
