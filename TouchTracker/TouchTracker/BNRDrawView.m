@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @property (nonatomic, weak) BNRLine *selectedLine;
+@property (nonatomic) CGFloat selectedLineWidthMultiplier;
 
 @end
 
@@ -77,7 +78,7 @@
     
     if (self.selectedLine) {
         [[UIColor whiteColor] set];
-        [self strokeLine:self.selectedLine];
+        [self strokeLine:self.selectedLine widthMultiplier:self.selectedLineWidthMultiplier];
     }
 }
 
@@ -223,6 +224,8 @@
     }
     
     if (gr.state == UIGestureRecognizerStateChanged) {
+        self.selectedLineWidthMultiplier = [self lineWidthMultiplierFromVelocity:[gr velocityInView:self]];
+        
         UIMenuController *menu = [UIMenuController sharedMenuController];
         [menu setMenuVisible:NO animated:NO];
         
@@ -246,15 +249,20 @@
 
 # pragma mark - helpers
 
-- (void)strokeLine: (BNRLine *)line
+- (void)strokeLine:(BNRLine *)line widthMultiplier:(CGFloat)widthMultiplier
 {
     UIBezierPath *bp = [UIBezierPath bezierPath];
-    bp.lineWidth = 10;
+    bp.lineWidth = 10.0 * widthMultiplier;
     bp.lineCapStyle = kCGLineCapRound;
     
     [bp moveToPoint:line.begin];
     [bp addLineToPoint:line.end];
     [bp stroke];
+}
+
+- (void)strokeLine:(BNRLine *)line
+{
+    [self strokeLine:line widthMultiplier:1.0];
 }
 
 - (BNRLine *)lineAtPoint:(CGPoint)p
@@ -282,6 +290,13 @@
     UIColor *lineColor = [[UIColor alloc] initWithHue:hue saturation:1.0 brightness:1.0 alpha:1.0];
     
     return lineColor;
+}
+
+- (CGFloat)lineWidthMultiplierFromVelocity:(CGPoint)velocity
+{
+    CGFloat speed = hypotf(velocity.x, velocity.y);
+    
+    return 1 + (speed / 1000);
 }
 
 @end
