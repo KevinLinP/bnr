@@ -18,20 +18,20 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 @end
 
 @implementation BNRDetailViewController
 
-- (void)setItem:(BNRItem *)item
-{
-    _item = item;
-    self.navigationItem.title = _item.itemName;
-}
+#pragma mark - view lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    UIInterfaceOrientation io = [[UIApplication sharedApplication] statusBarOrientation];
+    [self prepareViewsForOrientation:io];
     
     BNRItem *item = self.item;
     
@@ -86,8 +86,19 @@
     item.valueInDollars = [self.valueField.text intValue];
 }
 
-- (IBAction)backgroundTapped:(id)sender {
-    [self.view endEditing:YES];
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self prepareViewsForOrientation:toInterfaceOrientation];
+}
+
+# pragma mark - imagepicker
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    self.imageView.image = image;
+    [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)takePicture:(id)sender {
@@ -104,18 +115,33 @@
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
-    self.imageView.image = image;
-    [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
-    [self dismissViewControllerAnimated:YES completion:nil];
+# pragma mark - UI tweaks
+
+- (IBAction)backgroundTapped:(id)sender {
+    [self.view endEditing:YES];
 }
 
-- (BOOL) textFieldShouldReturn:(UITextField *)textField
+#pragma mark - helpers
+
+- (void)setItem:(BNRItem *)item
 {
-    [textField resignFirstResponder];
-    return YES;
+    _item = item;
+    self.navigationItem.title = _item.itemName;
+}
+
+- (void)prepareViewsForOrientation:(UIInterfaceOrientation)orientation
+{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return;
+    }
+    
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        self.imageView.hidden = YES;
+        self.cameraButton.enabled = NO;
+    } else {
+        self.imageView.hidden = NO;
+        self.cameraButton.enabled = YES;
+    }
 }
 
 @end
