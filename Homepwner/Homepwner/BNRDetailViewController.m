@@ -10,6 +10,7 @@
 #import "BNRItem.h"
 #import "BNRImageStore.h"
 #import "BNRItemStore.h"
+#import "BNRImageUIPopoverBackgroundView.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
 
@@ -167,6 +168,7 @@
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         self.imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
         self.imagePickerPopover.delegate = self;
+        self.imagePickerPopover.popoverBackgroundViewClass = [BNRImageUIPopoverBackgroundView class];
         
         [self.imagePickerPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     } else {
