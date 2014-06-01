@@ -16,6 +16,8 @@
 
 @implementation BNRImageStore
 
+#pragma mark - initializers
+
 + (instancetype)sharedStore
 {
     static BNRImageStore *sharedStore = nil;
@@ -39,9 +41,14 @@
     self = [super init];
     if (self) {
         _dictionary = [[NSMutableDictionary alloc] init];
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(clearCache:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
     }
     return self;
 }
+
+#pragma mark - actions
 
 - (void)setImage:(UIImage *)image forKey:(NSString *)key
 {
@@ -81,12 +88,20 @@
     [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
 }
 
+#pragma mark - helpers
+
 - (NSString *)imagePathForKey:(NSString *)key
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [documentDirectories firstObject];
     
     return [documentDirectory stringByAppendingPathComponent:key];
+}
+
+- (void)clearCache:(NSNotification *)note
+{
+    NSLog(@"flushing %d images out of the cache", [self.dictionary count]);
+    [self.dictionary removeAllObjects];
 }
 
 @end
