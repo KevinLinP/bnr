@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BNRItem.h"
+#import "Homepwner-Swift.h"
 
 @interface BNRDetailViewController : UIViewController
 

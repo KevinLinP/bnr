@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Homepwner-Swift.h"
 
 @class BNRItem;
 

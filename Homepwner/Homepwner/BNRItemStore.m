@@ -7,9 +7,7 @@
 //
 
 #import "BNRItemStore.h"
-#import "BNRItem.h"
 #import "BNRImageStore.h"
-
 
 @interface BNRItemStore ()
 

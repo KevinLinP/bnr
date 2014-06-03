@@ -7,9 +7,9 @@
 //
 
 #import "BNRDetailViewController.h"
-#import "BNRItem.h"
 #import "BNRImageStore.h"
 #import "BNRItemStore.h"
+#import "Homepwner-Swift.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
 

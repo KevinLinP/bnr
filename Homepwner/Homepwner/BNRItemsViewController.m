@@ -9,7 +9,7 @@
 #import "BNRItemsViewController.h"
 #import "BNRDetailViewController.h"
 #import "BNRItemStore.h"
-#import "BNRItem.h"
+#import "Homepwner-Swift.h"
 
 @interface BNRItemsViewController () <UITableViewDataSource, UITableViewDelegate>
 
