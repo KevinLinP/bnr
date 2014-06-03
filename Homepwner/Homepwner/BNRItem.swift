@@ -26,8 +26,7 @@ class BNRItem: NSObject, NSCoding {
     
     @objc(initWithCoder:) convenience init(coder decoder: NSCoder!) {
         let itemName = decoder.decodeObjectForKey("itemName") as String
-        // let valueInDollars = decoder.decodeIntForKey("valueInDollars") as Int
-        let valueInDollars = 5
+        let valueInDollars = decoder.decodeIntegerForKey("valueInDollars")
         let serialNumber = decoder.decodeObjectForKey("serialNumber") as String
         let dateCreated = decoder.decodeObjectForKey("dateCreated") as NSDate
         let itemKey = decoder.decodeObjectForKey("itemKey") as String
@@ -48,49 +47,28 @@ class BNRItem: NSObject, NSCoding {
     }
     
     /*
-    class func randomItem -> instancetype {
+    convenience init(random: Bool) {
         let randomAdjectiveList = ["Fluffy", "Rusty", "Shiny"]
         let randomNounList = ["Bear", "Spork", "Mac"]
         
-        //let adjectiveIndex = random % randomAdjectiveList.count
-        let adjectiveIndex = 1
-        // let nounIndex = arc4random() % randomNounList.count
-        let nounIndex = 2
+        let adjectiveIndex = Integer.random() % randomAdjectiveList.count
+        let nounIndex = Integer.random() % randomNounList.count
         
         let randomName = NSString(format:"%@ %@", randomAdjectiveList[adjectiveIndex], randomAdjectiveList[nounIndex]);
         
-        let randomValue = arc4random() % 100
-        let randomSerialNumber = NSString(format:"%c%c%c%c%c",
-        '0' + arc4random() % 10,
-        'A' + arc4random() % 26,
-        '0' + arc4random() % 10,
-        'A' + arc4random() % 26,
-        '0' + arc4random() % 10);
+        let zero: Character = "0"
+        let a: Character = "A"
         
-        BNRItem *newItem = [[BNRItem alloc] initWithItemName:randomName
-        valueInDollars:randomValue
-        serialNumber:randomSerialNumber];
-        return newItem;
+        let randomValue = arc4random() % 100
+        let randomSerialNumber = String(format:"%c%c%c%c%c",
+            zero + arc4random() % 26,
+            a + arc4random() % 26,
+            zero + arc4random() % 10,
+            a + arc4random() % 26,
+            zero + arc4random() % 10);
+        
+        self.init(fromItemName: randomName, valueInDollars: randomValue, serialNumber: randomSerialNumber)
     }
-    
-    
-
-  
-    
-    - (instancetype)initWithCoder:(NSCoder *)aDecoder
-    {
-    self = [super init];
-    if (self) {
-    _itemName = [aDecoder decodeObjectForKey:@"itemName"];
-    _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
-    _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
-    _itemKey = [aDecoder decodeObjectForKey:@"itemKey"];
-    _valueInDollars = [aDecoder decodeIntForKey:@"valueInDollars"];
-    }
-    
-    return self;
-    }
-
 */
     
     func description() -> NSString {
@@ -108,7 +86,7 @@ class BNRItem: NSObject, NSCoding {
         encoder.encodeObject(self.serialNumber, forKey: "serialNumber")
         encoder.encodeObject(self.dateCreated, forKey: "dateCreated")
         encoder.encodeObject(self.itemKey, forKey: "itemKey")
-        //aCoder.encodeInt(self.valueInDollars., forKey: "valueInDollars")
+        encoder.encodeInteger(self.valueInDollars, forKey: "valueInDollars")
     }
     
     
