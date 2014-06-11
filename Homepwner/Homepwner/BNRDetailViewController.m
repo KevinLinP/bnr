@@ -7,7 +7,6 @@
 //
 
 #import "BNRDetailViewController.h"
-#import "BNRImageStore.h"
 #import "Homepwner-Swift.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
@@ -122,7 +121,7 @@
 {
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = image;
-    [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
+    [[BNRImageStore sharedStore] setImage:image key:self.item.itemKey];
     
     if (self.imagePickerPopover) {
         [self.imagePickerPopover dismissPopoverAnimated:YES];
