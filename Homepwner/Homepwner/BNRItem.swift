@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BNRItem: NSObject, NSCoding {
+@objc class BNRItem: NSObject, NSCoding {
     
     var itemName, serialNumber, itemKey: NSString
     var valueInDollars: Int

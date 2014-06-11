@@ -8,7 +8,6 @@
 
 #import "BNRDetailViewController.h"
 #import "BNRImageStore.h"
-#import "BNRItemStore.h"
 #import "Homepwner-Swift.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
@@ -181,7 +180,7 @@
 
 - (void)cancel:(id)sender
 {
-    [[BNRItemStore sharedStore] removeItem:self.item];
+    //[[BNRItemStore sharedStore] removeItem:self.item];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
