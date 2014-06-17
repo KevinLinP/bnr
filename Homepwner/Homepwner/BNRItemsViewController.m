@@ -7,7 +7,6 @@
 //
 
 #import "BNRItemsViewController.h"
-#import "BNRDetailViewController.h"
 #import "Homepwner-Swift.h"
 
 @interface BNRItemsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -96,7 +95,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initForNewItem:NO];
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initWithNewItem:NO];
     detailViewController.item = [self itemAtIndexPath:indexPath];
                           
     [self.navigationController pushViewController:detailViewController animated:YES];
@@ -108,7 +107,7 @@
 {
     BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
     
-    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initForNewItem:YES];
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initWithNewItem:YES];
     detailViewController.item = newItem;
     detailViewController.dismissBlock = ^{
         [self.tableView reloadData];
