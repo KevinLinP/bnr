@@ -13,7 +13,7 @@ var _sharedBNRItemStore : BNRItemStore?
 @objc class BNRItemStore: NSObject {
     var privateItems : NSMutableArray
     
-    init(private: Bool) {
+    init(isPrivate: Bool) {
         let path = BNRItemStore.itemArchivePath()
         let storedItems = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? NSMutableArray
         
@@ -27,8 +27,8 @@ var _sharedBNRItemStore : BNRItemStore?
     }
     
     class func sharedStore() -> BNRItemStore {
-        if !_sharedBNRItemStore {
-            _sharedBNRItemStore = BNRItemStore(private: true)
+        if _sharedBNRItemStore == nil {
+            _sharedBNRItemStore = BNRItemStore(isPrivate: true)
         }
         
         return _sharedBNRItemStore!
@@ -55,20 +55,20 @@ var _sharedBNRItemStore : BNRItemStore?
             return
         }
         
-        let item = privateItems[fromIndex] as BNRItem
+        let item = privateItems[fromIndex] as! BNRItem
         privateItems.removeObjectIdenticalTo(item)
         privateItems.insertObject(item, atIndex: toIndex)
     }
     
     func saveChanges() -> Bool {
-        let path = BNRItemStore.itemArchivePath() as NSString;
+        let path = BNRItemStore.itemArchivePath();
         
         return NSKeyedArchiver.archiveRootObject(self.privateItems, toFile: path)
     }
     
     class func itemArchivePath() -> String {
         let documentDirectories = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        let documentDirectory = documentDirectories[0] as String
+        let documentDirectory = documentDirectories[0] as! String
         
         return documentDirectory.stringByAppendingPathComponent("items.archive")
     }

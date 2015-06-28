@@ -24,12 +24,12 @@ import Foundation
         super.init()
     }
     
-    @objc(initWithCoder:) convenience init(coder decoder: NSCoder!) {
-        let itemName = decoder.decodeObjectForKey("itemName") as String
-        let valueInDollars = decoder.decodeIntegerForKey("valueInDollars")
-        let serialNumber = decoder.decodeObjectForKey("serialNumber") as String
-        let dateCreated = decoder.decodeObjectForKey("dateCreated") as NSDate
-        let itemKey = decoder.decodeObjectForKey("itemKey") as String
+    convenience required init(coder aCoder: NSCoder) {
+        let itemName = aCoder.decodeObjectForKey("itemName") as! String
+        let valueInDollars = aCoder.decodeIntegerForKey("valueInDollars")
+        let serialNumber = aCoder.decodeObjectForKey("serialNumber") as! String
+        let dateCreated = aCoder.decodeObjectForKey("dateCreated") as! NSDate
+        let itemKey = aCoder.decodeObjectForKey("itemKey") as! String
         
         self.init(fromItemName: itemName, valueInDollars: valueInDollars, serialNumber: serialNumber, dateCreated: dateCreated, itemKey: itemKey)
     }
@@ -42,7 +42,7 @@ import Foundation
         self.init(fromItemName: fromItemName, valueInDollars: 0, serialNumber: "")
     }
     
-    convenience init() {
+    override convenience init() {
         self.init(fromItemName: "Item")
     }
     
@@ -71,7 +71,7 @@ import Foundation
     }
 */
     
-    func description() -> NSString {
+    func itemDescription() -> NSString {
         let descriptionString = NSString(format:"%@ (%@): Worth $%d, recorded on %@",
             self.itemName,
             self.serialNumber,
@@ -81,12 +81,12 @@ import Foundation
         return descriptionString
     }
     
-    func encodeWithCoder(encoder: NSCoder!) {
-        encoder.encodeObject(self.itemName, forKey: "itemName")
-        encoder.encodeObject(self.serialNumber, forKey: "serialNumber")
-        encoder.encodeObject(self.dateCreated, forKey: "dateCreated")
-        encoder.encodeObject(self.itemKey, forKey: "itemKey")
-        encoder.encodeInteger(self.valueInDollars, forKey: "valueInDollars")
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.itemName, forKey: "itemName")
+        aCoder.encodeObject(self.serialNumber, forKey: "serialNumber")
+        aCoder.encodeObject(self.dateCreated, forKey: "dateCreated")
+        aCoder.encodeObject(self.itemKey, forKey: "itemKey")
+        aCoder.encodeInteger(self.valueInDollars, forKey: "valueInDollars")
     }
     
     

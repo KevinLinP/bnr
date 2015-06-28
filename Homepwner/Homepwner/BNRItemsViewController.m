@@ -63,7 +63,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     
     BNRItem *item = [self itemAtIndexPath:indexPath];
-    cell.textLabel.text = item.description;
+    cell.textLabel.text = item.itemDescription;
     
     return cell;
 }

@@ -11,11 +11,11 @@ import UIKit
 
 var sharedDateFormatter = NSDateFormatter()
 
-@objc class BNRDetailViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate {
+@objc(BNRDetailViewController) @IBDesignable class BNRDetailViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate {
     
     var item: BNRItem? {
     didSet {
-        self.navigationItem.title = item!.itemName
+        self.navigationItem.title = item!.itemName as String
     }
     }
     
@@ -50,6 +50,10 @@ var sharedDateFormatter = NSDateFormatter()
             self.navigationItem.leftBarButtonItem = cancelItem
         }
     }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,12 +63,12 @@ var sharedDateFormatter = NSDateFormatter()
         
         let item = self.item!
         
-        self.nameField!.text = item.itemName
-        self.serialNumberField!.text = item.serialNumber
+        self.nameField!.text = item.itemName as String
+        self.serialNumberField!.text = item.serialNumber as String
         self.valueField!.text = "\(item.valueInDollars)"
         self.dateLabel!.text = self.dateFormatter.stringFromDate(item.dateCreated)
         
-        if let imageToDisplay = BNRImageStore.sharedStore().imageForKey(item.itemKey) {
+        if let imageToDisplay = BNRImageStore.sharedStore().imageForKey(item.itemKey as String) {
             self.imageView!.image = imageToDisplay
         }
     }
@@ -78,7 +82,7 @@ var sharedDateFormatter = NSDateFormatter()
         self.view.addSubview(iv)
         self.imageView = iv
     
-        let nameMap: Dictionary<String, UIView> = ["imageView": self.imageView!, "dateLabel": self.dateLabel!, "toolbar": self.toolbar!]
+        let nameMap: [String: UIView] = ["imageView": self.imageView!, "dateLabel": self.dateLabel!, "toolbar": self.toolbar!]
         let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[imageView]-0-|", options: NSLayoutFormatOptions(0), metrics: nil, views: nameMap)
         let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[dateLabel]-[imageView]-[toolbar]", options: NSLayoutFormatOptions(0), metrics: nil, views: nameMap)
         self.view.addConstraints(horizontalConstraints)
@@ -105,18 +109,17 @@ var sharedDateFormatter = NSDateFormatter()
         self.prepareViews(toInterfaceOrientation)
     }
     
-    func imagePickerController(picker: UIImagePickerController!,
-        didFinishPickingMediaWithInfo info: NSDictionary!) {
-        let image = info[UIImagePickerControllerOriginalImage] as UIImage
-        self.imageView!.image = image
-        BNRImageStore.sharedStore().setImage(image, key: self.item!.itemKey)
-        
-        if let imagePickerPopover = self.imagePickerPopover {
-            imagePickerPopover.dismissPopoverAnimated(true)
-            self.imagePickerPopover = nil
-        } else {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            self.imageView!.image = image
+            BNRImageStore.sharedStore().setImage(image, key: self.item!.itemKey as String)
+            
+            if let imagePickerPopover = self.imagePickerPopover {
+                imagePickerPopover.dismissPopoverAnimated(true)
+                self.imagePickerPopover = nil
+            } else {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
     }
     
     func popoverControllerDidDismissPopover(popoverController: UIPopoverController) {
@@ -124,7 +127,7 @@ var sharedDateFormatter = NSDateFormatter()
         self.imagePickerPopover = nil
     }
     
-    @IBAction func backgroundTapped(sender: AnyObject) {
+    func backgroundTapped(sender: AnyObject) {
         self.view.endEditing(true)
     }
   
@@ -150,19 +153,19 @@ var sharedDateFormatter = NSDateFormatter()
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.imagePickerPopover = UIPopoverController(contentViewController: imagePicker)
             self.imagePickerPopover!.delegate = self
-            self.imagePickerPopover!.presentPopoverFromBarButtonItem(sender as UIBarButtonItem, permittedArrowDirections: UIPopoverArrowDirection.Up, animated: true)
+            self.imagePickerPopover!.presentPopoverFromBarButtonItem(sender as! UIBarButtonItem, permittedArrowDirections: UIPopoverArrowDirection.Up, animated: true)
         } else {
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
     }
     
     func save(sender: AnyObject) {
-        self.presentingViewController.dismissViewControllerAnimated(true, completion: self.dismissBlock)
+        self.presentingViewController!.dismissViewControllerAnimated(true, completion: self.dismissBlock)
     }
     
     func cancel(sender: AnyObject) {
         BNRItemStore.sharedStore().removeItem(self.item!)
-        self.presentingViewController.dismissViewControllerAnimated(true, completion: self.dismissBlock)
+        self.presentingViewController!.dismissViewControllerAnimated(true, completion: self.dismissBlock)
     }
     
     func prepareViews(orientation: UIInterfaceOrientation) {

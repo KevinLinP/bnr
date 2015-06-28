@@ -15,7 +15,7 @@ var _sharedBNRImageStore : BNRImageStore?
     
     let dictionary = NSMutableDictionary()
     
-    init(private: Bool) {
+    init(isPrivate: Bool) {
         super.init()
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -24,14 +24,14 @@ var _sharedBNRImageStore : BNRImageStore?
     }
     
     class func sharedStore() -> BNRImageStore {
-        if !_sharedBNRImageStore {
-            _sharedBNRImageStore = BNRImageStore(private: true)
+        if _sharedBNRImageStore == nil {
+            _sharedBNRImageStore = BNRImageStore(isPrivate: true)
         }
         
         return _sharedBNRImageStore!
     }
     
-    func setImage(image: UIImage, key: NSString) {
+    func setImage(image: UIImage, key: String) {
         self.dictionary[key] = image
         
         let imagePath = self.imagePath(key)
@@ -42,12 +42,12 @@ var _sharedBNRImageStore : BNRImageStore?
     func imageForKey(key: String) -> UIImage? {
         var result = self.dictionary[key] as? UIImage
         
-        if !result {
+        if result != nil {
             let imagePath = self.imagePath(key)
             result = UIImage(contentsOfFile: imagePath)
         }
         
-        if result {
+        if result != nil {
             self.dictionary[key] = result
         } else {
             NSLog("Error: uanble to find %@", self.imagePath(key))
@@ -65,7 +65,7 @@ var _sharedBNRImageStore : BNRImageStore?
     
     func imagePath(key: String) -> String {
         let documentDirectories = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        let documentDirectory = documentDirectories[0] as String
+        let documentDirectory = documentDirectories[0] as! String
         
         return documentDirectory.stringByAppendingPathComponent(key)
     }
