@@ -36,21 +36,22 @@ var _sharedBNRImageStore : BNRImageStore?
         
         let imagePath = self.imagePath(key)
         let data = UIImageJPEGRepresentation(image, 0.5)
+        
         data.writeToFile(imagePath, atomically: true)
     }
     
     func imageForKey(key: String) -> UIImage? {
-        var result = self.dictionary[key] as? UIImage
+        var result = self.dictionary[key] as! UIImage?
         
-        if result != nil {
+        if (result == nil) {
             let imagePath = self.imagePath(key)
             result = UIImage(contentsOfFile: imagePath)
-        }
-        
-        if result != nil {
-            self.dictionary[key] = result
-        } else {
-            NSLog("Error: uanble to find %@", self.imagePath(key))
+            
+            if (result != nil) {
+                self.dictionary[key] = result
+            } else {
+                NSLog(" Error: unable to find %@", imagePath);
+            }
         }
         
         return result

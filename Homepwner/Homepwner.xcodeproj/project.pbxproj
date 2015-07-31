@@ -117,13 +117,13 @@
 		76BAD1481900DE0100722F5B /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				764A8A931948108C0020D7E2 /* BNRImageStore.swift */,
 				76D0D204193D780500F8DEDD /* BNRItem.swift */,
 				7645B6CB193DB29300C0E2CD /* BNRItemStore.swift */,
 				76B3197F1B6B39FC005B921B /* BNRAppDelegate.swift */,
 				764B08DA1B6ADCBE000B0957 /* BNRItemsViewController.swift */,
 				7622111A194AD50E00DEBCA2 /* BNRDetailViewController.swift */,
 				76BAD1801903A43100722F5B /* BNRDetailView.xib */,
-				764A8A931948108C0020D7E2 /* BNRImageStore.swift */,
 				76BAD1541900DE0100722F5B /* Images.xcassets */,
 				76BAD1491900DE0100722F5B /* Supporting Files */,
 				76D0D201193D778200F8DEDD /* Homepwner-Bridging-Header.h */,
