@@ -35,12 +35,12 @@ var _sharedBNRItemStore : BNRItemStore?
     }
     
     func allItems() -> NSArray {
-        return privateItems;
+        return privateItems
     }
     
     func createItem() -> BNRItem {
-        let item = BNRItem()
-        privateItems.addObject(item);
+        let item = BNRItem(random: true)
+        privateItems.addObject(item)
         return item
     }
     

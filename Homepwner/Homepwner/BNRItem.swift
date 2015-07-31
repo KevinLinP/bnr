@@ -46,30 +46,30 @@ import Foundation
         self.init(fromItemName: "Item")
     }
     
-    /*
+    
     convenience init(random: Bool) {
         let randomAdjectiveList = ["Fluffy", "Rusty", "Shiny"]
         let randomNounList = ["Bear", "Spork", "Mac"]
         
-        let adjectiveIndex = Integer.random() % randomAdjectiveList.count
-        let nounIndex = Integer.random() % randomNounList.count
+        let adjectiveIndex = Int(arc4random_uniform(3));
+        let nounIndex = Int(arc4random_uniform(3));
         
-        let randomName = NSString(format:"%@ %@", randomAdjectiveList[adjectiveIndex], randomAdjectiveList[nounIndex]);
+        let randomName = String(format:"%@ %@", randomAdjectiveList[adjectiveIndex], randomNounList[nounIndex]);
         
-        let zero: Character = "0"
-        let a: Character = "A"
+        let a = 65;
         
-        let randomValue = arc4random() % 100
-        let randomSerialNumber = String(format:"%c%c%c%c%c",
-            zero + arc4random() % 26,
-            a + arc4random() % 26,
-            zero + arc4random() % 10,
-            a + arc4random() % 26,
-            zero + arc4random() % 10);
+        let randomValue = Int(arc4random()) % 100
+        let randomSerialNumber = String(format:"%d%@%d%@%d",
+            Int(arc4random_uniform(10)),
+            String(UnicodeScalar(a + (Int(arc4random()) % 26))),
+            Int(arc4random_uniform(10)),
+            String(UnicodeScalar(a + (Int(arc4random()) % 26))),
+            Int(arc4random_uniform(10)))
+    
         
         self.init(fromItemName: randomName, valueInDollars: randomValue, serialNumber: randomSerialNumber)
     }
-*/
+
     
     func itemDescription() -> String {
         let descriptionString = String(format:"%@ (%@): Worth $%d, recorded on %@",
