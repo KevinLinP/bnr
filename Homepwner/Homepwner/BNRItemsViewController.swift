@@ -33,7 +33,8 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        let nib = UINib(nibName: "BNRItemCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "BNRItemCell")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -42,10 +43,13 @@ import UIKit
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath) as! UITableViewCell
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("BNRItemCell", forIndexPath: indexPath) as! BNRItemCell
         
         let item = itemAtIndexPath(indexPath)
-        cell.textLabel?.text = item.itemDescription()
+        cell.nameLabel.text = item.itemName
+        cell.serialNumberLabel.text = item.serialNumber
+        cell.valueLabel.text = "$\(item.valueInDollars)"
         
         return cell
     }

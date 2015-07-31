@@ -12,6 +12,8 @@
 		764A8A941948108C0020D7E2 /* BNRImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764A8A931948108C0020D7E2 /* BNRImageStore.swift */; };
 		764B08DB1B6ADCBE000B0957 /* BNRItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764B08DA1B6ADCBE000B0957 /* BNRItemsViewController.swift */; };
 		76B319801B6B39FC005B921B /* BNRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B3197F1B6B39FC005B921B /* BNRAppDelegate.swift */; };
+		76B319821B6B533A005B921B /* BNRItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B319811B6B533A005B921B /* BNRItemCell.swift */; };
+		76B319841B6C33A3005B921B /* BNRItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B319831B6C33A3005B921B /* BNRItemCell.xib */; };
 		76BAD1431900DE0100722F5B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1421900DE0100722F5B /* Foundation.framework */; };
 		76BAD1451900DE0100722F5B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1441900DE0100722F5B /* CoreGraphics.framework */; };
 		76BAD1471900DE0100722F5B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1461900DE0100722F5B /* UIKit.framework */; };
@@ -42,6 +44,8 @@
 		764A8A931948108C0020D7E2 /* BNRImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRImageStore.swift; sourceTree = "<group>"; };
 		764B08DA1B6ADCBE000B0957 /* BNRItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRItemsViewController.swift; sourceTree = "<group>"; };
 		76B3197F1B6B39FC005B921B /* BNRAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRAppDelegate.swift; sourceTree = "<group>"; };
+		76B319811B6B533A005B921B /* BNRItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRItemCell.swift; sourceTree = "<group>"; };
+		76B319831B6C33A3005B921B /* BNRItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRItemCell.xib; sourceTree = "<group>"; };
 		76BAD13F1900DE0100722F5B /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BAD1421900DE0100722F5B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		76BAD1441900DE0100722F5B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -119,6 +123,8 @@
 			children = (
 				764A8A931948108C0020D7E2 /* BNRImageStore.swift */,
 				76D0D204193D780500F8DEDD /* BNRItem.swift */,
+				76B319811B6B533A005B921B /* BNRItemCell.swift */,
+				76B319831B6C33A3005B921B /* BNRItemCell.xib */,
 				7645B6CB193DB29300C0E2CD /* BNRItemStore.swift */,
 				76B3197F1B6B39FC005B921B /* BNRAppDelegate.swift */,
 				764B08DA1B6ADCBE000B0957 /* BNRItemsViewController.swift */,
@@ -236,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76BAD1821903A43100722F5B /* BNRDetailView.xib in Resources */,
+				76B319841B6C33A3005B921B /* BNRItemCell.xib in Resources */,
 				76BAD14D1900DE0100722F5B /* InfoPlist.strings in Resources */,
 				76BAD1551900DE0100722F5B /* Images.xcassets in Resources */,
 			);
@@ -261,6 +268,7 @@
 				764B08DB1B6ADCBE000B0957 /* BNRItemsViewController.swift in Sources */,
 				7645B6CC193DB29300C0E2CD /* BNRItemStore.swift in Sources */,
 				7622111B194AD50E00DEBCA2 /* BNRDetailViewController.swift in Sources */,
+				76B319821B6B533A005B921B /* BNRItemCell.swift in Sources */,
 				76B319801B6B39FC005B921B /* BNRAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
