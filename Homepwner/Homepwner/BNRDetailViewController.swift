@@ -63,7 +63,7 @@ var sharedDateFormatter = NSDateFormatter()
         
         let item = self.item!
         
-        self.nameField!.text = item.itemName as String
+        self.nameField!.text = item.itemName
         self.serialNumberField!.text = item.serialNumber as String
         self.valueField!.text = "\(item.valueInDollars)"
         self.dateLabel!.text = self.dateFormatter.stringFromDate(item.dateCreated)

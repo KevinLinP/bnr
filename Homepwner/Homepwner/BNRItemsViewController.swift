@@ -12,18 +12,18 @@ import UIKit
 @IBDesignable class BNRItemsViewController: UITableViewController,UITableViewDataSource, UITableViewDelegate {
     
     init() {
-        super.init(style: UITableViewStyle.Plain);
+        super.init(style: UITableViewStyle.Plain)
         
-        let bbi = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNewItem:");
+        let bbi = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNewItem:")
         
-        let navItem = self.navigationItem;
-        navItem.title = "Homepwnr";
-        navItem.leftBarButtonItem = self.editButtonItem();
-        navItem.rightBarButtonItem = bbi;
+        let navItem = self.navigationItem
+        navItem.title = "Homepwnr"
+        navItem.leftBarButtonItem = self.editButtonItem()
+        navItem.rightBarButtonItem = bbi
     }
     
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -31,68 +31,68 @@ import UIKit
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad();
+        super.viewDidLoad()
         
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell");
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated);
-        tableView.reloadData();
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath) as! UITableViewCell;
+        let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath) as! UITableViewCell
         
-        let item = itemAtIndexPath(indexPath);
-        cell.textLabel?.text = item.itemDescription() as String;
+        let item = itemAtIndexPath(indexPath)
+        cell.textLabel?.text = item.itemDescription()
         
-        return cell;
+        return cell
     }
     
     func itemAtIndexPath(indexPath: NSIndexPath) -> BNRItem {
-        let items = BNRItemStore.sharedStore().allItems();
-        return items[indexPath.row] as! BNRItem;
+        let items = BNRItemStore.sharedStore().allItems()
+        return items[indexPath.row] as! BNRItem
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return BNRItemStore.sharedStore().allItems().count;
+        return BNRItemStore.sharedStore().allItems().count
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            let items = BNRItemStore.sharedStore().allItems();
-            let item = items[indexPath.row] as! BNRItem;
+            let items = BNRItemStore.sharedStore().allItems()
+            let item = items[indexPath.row] as! BNRItem
             
-            BNRItemStore.sharedStore().removeItem(item);
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right);
+            BNRItemStore.sharedStore().removeItem(item)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
         }
     }
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        BNRItemStore.sharedStore().moveItemAtIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row);
+        BNRItemStore.sharedStore().moveItemAtIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailViewController = BNRDetailViewController(newItem: false);
-        detailViewController.item = itemAtIndexPath(indexPath);
+        let detailViewController = BNRDetailViewController(newItem: false)
+        detailViewController.item = itemAtIndexPath(indexPath)
         
-        self.navigationController?.pushViewController(detailViewController, animated: true);
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     @IBAction func addNewItem(sender: AnyObject) {
-        let newItem = BNRItemStore.sharedStore().createItem();
+        let newItem = BNRItemStore.sharedStore().createItem()
         
         let detailViewController = BNRDetailViewController(newItem: true);
-        detailViewController.item = newItem;
+        detailViewController.item = newItem
         detailViewController.dismissBlock = {
-            self.tableView.reloadData();
+            self.tableView.reloadData()
         }
         
-        let navController = UINavigationController(rootViewController: detailViewController);
-        navController.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+        let navController = UINavigationController(rootViewController: detailViewController)
+        navController.modalPresentationStyle = UIModalPresentationStyle.FormSheet
         
-        self.presentViewController(navController, animated: true, completion: nil);
+        self.presentViewController(navController, animated: true, completion: nil)
     }
 }
 

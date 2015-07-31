@@ -10,11 +10,11 @@ import Foundation
 
 @objc class BNRItem: NSObject, NSCoding {
     
-    var itemName, serialNumber, itemKey: NSString
+    var itemName, serialNumber, itemKey: String
     var valueInDollars: Int
     var dateCreated: NSDate
     
-    init(fromItemName: NSString, valueInDollars: Int, serialNumber: NSString, dateCreated: NSDate, itemKey: NSString) {
+    init(fromItemName: String, valueInDollars: Int, serialNumber: String, dateCreated: NSDate, itemKey: String) {
         self.itemName = fromItemName
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
@@ -34,11 +34,11 @@ import Foundation
         self.init(fromItemName: itemName, valueInDollars: valueInDollars, serialNumber: serialNumber, dateCreated: dateCreated, itemKey: itemKey)
     }
     
-    convenience init(fromItemName: NSString, valueInDollars: Int, serialNumber: NSString) {
+    convenience init(fromItemName: String, valueInDollars: Int, serialNumber: String) {
         self.init(fromItemName: fromItemName, valueInDollars: valueInDollars, serialNumber: serialNumber, dateCreated: NSDate(), itemKey: NSUUID().UUIDString)
     }
     
-    convenience init(fromItemName: NSString) {
+    convenience init(fromItemName: String) {
         self.init(fromItemName: fromItemName, valueInDollars: 0, serialNumber: "")
     }
     
@@ -71,8 +71,8 @@ import Foundation
     }
 */
     
-    func itemDescription() -> NSString {
-        let descriptionString = NSString(format:"%@ (%@): Worth $%d, recorded on %@",
+    func itemDescription() -> String {
+        let descriptionString = String(format:"%@ (%@): Worth $%d, recorded on %@",
             self.itemName,
             self.serialNumber,
             self.valueInDollars,
