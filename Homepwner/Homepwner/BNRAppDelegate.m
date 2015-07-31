@@ -7,7 +7,6 @@
 //
 
 #import "BNRAppDelegate.h"
-#import "BNRItemsViewController.h"
 #import "Homepwner-Swift.h"
 
 @implementation BNRAppDelegate
