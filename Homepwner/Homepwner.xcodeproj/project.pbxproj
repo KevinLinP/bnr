@@ -11,12 +11,11 @@
 		7645B6CC193DB29300C0E2CD /* BNRItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7645B6CB193DB29300C0E2CD /* BNRItemStore.swift */; };
 		764A8A941948108C0020D7E2 /* BNRImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764A8A931948108C0020D7E2 /* BNRImageStore.swift */; };
 		764B08DB1B6ADCBE000B0957 /* BNRItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764B08DA1B6ADCBE000B0957 /* BNRItemsViewController.swift */; };
+		76B319801B6B39FC005B921B /* BNRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B3197F1B6B39FC005B921B /* BNRAppDelegate.swift */; };
 		76BAD1431900DE0100722F5B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1421900DE0100722F5B /* Foundation.framework */; };
 		76BAD1451900DE0100722F5B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1441900DE0100722F5B /* CoreGraphics.framework */; };
 		76BAD1471900DE0100722F5B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1461900DE0100722F5B /* UIKit.framework */; };
 		76BAD14D1900DE0100722F5B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76BAD14B1900DE0100722F5B /* InfoPlist.strings */; };
-		76BAD14F1900DE0100722F5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD14E1900DE0100722F5B /* main.m */; };
-		76BAD1531900DE0100722F5B /* BNRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD1521900DE0100722F5B /* BNRAppDelegate.m */; };
 		76BAD1551900DE0100722F5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76BAD1541900DE0100722F5B /* Images.xcassets */; };
 		76BAD15C1900DE0100722F5B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD15B1900DE0100722F5B /* XCTest.framework */; };
 		76BAD15D1900DE0100722F5B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAD1421900DE0100722F5B /* Foundation.framework */; };
@@ -42,16 +41,14 @@
 		7645B6CB193DB29300C0E2CD /* BNRItemStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRItemStore.swift; sourceTree = "<group>"; };
 		764A8A931948108C0020D7E2 /* BNRImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRImageStore.swift; sourceTree = "<group>"; };
 		764B08DA1B6ADCBE000B0957 /* BNRItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRItemsViewController.swift; sourceTree = "<group>"; };
+		76B3197F1B6B39FC005B921B /* BNRAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BNRAppDelegate.swift; sourceTree = "<group>"; };
 		76BAD13F1900DE0100722F5B /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BAD1421900DE0100722F5B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		76BAD1441900DE0100722F5B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		76BAD1461900DE0100722F5B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		76BAD14A1900DE0100722F5B /* Homepwner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Homepwner-Info.plist"; sourceTree = "<group>"; };
 		76BAD14C1900DE0100722F5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		76BAD14E1900DE0100722F5B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		76BAD1501900DE0100722F5B /* Homepwner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Homepwner-Prefix.pch"; sourceTree = "<group>"; };
-		76BAD1511900DE0100722F5B /* BNRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRAppDelegate.h; sourceTree = "<group>"; };
-		76BAD1521900DE0100722F5B /* BNRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRAppDelegate.m; sourceTree = "<group>"; };
 		76BAD1541900DE0100722F5B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		76BAD15A1900DE0100722F5B /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomepwnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BAD15B1900DE0100722F5B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -122,8 +119,7 @@
 			children = (
 				76D0D204193D780500F8DEDD /* BNRItem.swift */,
 				7645B6CB193DB29300C0E2CD /* BNRItemStore.swift */,
-				76BAD1511900DE0100722F5B /* BNRAppDelegate.h */,
-				76BAD1521900DE0100722F5B /* BNRAppDelegate.m */,
+				76B3197F1B6B39FC005B921B /* BNRAppDelegate.swift */,
 				764B08DA1B6ADCBE000B0957 /* BNRItemsViewController.swift */,
 				7622111A194AD50E00DEBCA2 /* BNRDetailViewController.swift */,
 				76BAD1801903A43100722F5B /* BNRDetailView.xib */,
@@ -140,7 +136,6 @@
 			children = (
 				76BAD14A1900DE0100722F5B /* Homepwner-Info.plist */,
 				76BAD14B1900DE0100722F5B /* InfoPlist.strings */,
-				76BAD14E1900DE0100722F5B /* main.m */,
 				76BAD1501900DE0100722F5B /* Homepwner-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -266,8 +261,7 @@
 				764B08DB1B6ADCBE000B0957 /* BNRItemsViewController.swift in Sources */,
 				7645B6CC193DB29300C0E2CD /* BNRItemStore.swift in Sources */,
 				7622111B194AD50E00DEBCA2 /* BNRDetailViewController.swift in Sources */,
-				76BAD14F1900DE0100722F5B /* main.m in Sources */,
-				76BAD1531900DE0100722F5B /* BNRAppDelegate.m in Sources */,
+				76B319801B6B39FC005B921B /* BNRAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

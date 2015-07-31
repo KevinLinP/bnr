@@ -69,7 +69,6 @@ import Foundation
         
         self.init(fromItemName: randomName, valueInDollars: randomValue, serialNumber: randomSerialNumber)
     }
-
     
     func itemDescription() -> String {
         let descriptionString = String(format:"%@ (%@): Worth $%d, recorded on %@",
