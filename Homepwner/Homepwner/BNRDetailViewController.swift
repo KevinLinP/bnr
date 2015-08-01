@@ -111,6 +111,9 @@ var sharedDateFormatter = NSDateFormatter()
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+            item!.setThumbnailFromImage(image)
+        
             self.imageView!.image = image
             BNRImageStore.sharedStore().setImage(image, key: self.item!.itemKey as String)
             

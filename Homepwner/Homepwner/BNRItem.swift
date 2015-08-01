@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 @objc class BNRItem: NSObject, NSCoding {
     
     var itemName, serialNumber, itemKey: String
     var valueInDollars: Int
     var dateCreated: NSDate
+    var thumbnail: UIImage?
     
     init(fromItemName: String, valueInDollars: Int, serialNumber: String, dateCreated: NSDate, itemKey: String) {
         self.itemName = fromItemName
@@ -78,6 +80,29 @@ import Foundation
             self.dateCreated)
         
         return descriptionString
+    }
+    
+    func setThumbnailFromImage(image: UIImage) {
+        let originalSize = image.size
+        let newRect = CGRect(x: 0, y: 0, width: 40, height: 40)
+        let ratio = max(newRect.width/originalSize.width, newRect.height/originalSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newRect.size, false, 0.0)
+        let path = UIBezierPath(roundedRect: newRect, cornerRadius: 5.0)
+        path.addClip()
+        
+        let width = ratio * originalSize.width
+        let height = ratio * originalSize.height
+        let x = ((newRect.size.width - width) / 2.0)
+        let y = ((newRect.size.height - height) / 2.0)
+        let projectRect = CGRect(x: x, y: y, width: width, height: height)
+        
+        image.drawInRect(projectRect)
+        
+        let smallImage = UIGraphicsGetImageFromCurrentImageContext()
+        self.thumbnail = smallImage
+        
+        UIGraphicsEndImageContext()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {

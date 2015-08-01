@@ -50,6 +50,7 @@ import UIKit
         cell.nameLabel.text = item.itemName
         cell.serialNumberLabel.text = item.serialNumber
         cell.valueLabel.text = "$\(item.valueInDollars)"
+        cell.thumbnailView.image = item.thumbnail
         
         return cell
     }
